@@ -14,7 +14,7 @@ const cors = require("cors");
 app.use(
   cors({
     // origin: "http://localhost:5173",
-    origin: "https://leet-code-master-backend.vercel.app/",
+    origin: "https://leet-code-master-backend.vercel.app",
     credentials: true,
   }),
 );
@@ -36,7 +36,6 @@ const InitalizeConnection = async () => {
     app.listen(process.env.PORT, () => {
       console.log("Server listening at port number: " + process.env.PORT);
     });
-    
   } catch (err) {
     console.log("Error: " + err);
   }
