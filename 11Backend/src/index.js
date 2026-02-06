@@ -35,6 +35,10 @@ const InitalizeConnection = async () => {
     app.listen(process.env.PORT, () => {
       console.log("Server listening at port number: " + process.env.PORT);
     });
+    app.get("/", (req, res) => {
+  res.send("Backend is running successfully!");
+});
+
   } catch (err) {
     console.log("Error: " + err);
   }
