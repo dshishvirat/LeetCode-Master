@@ -14,7 +14,7 @@ const cors = require("cors");
 app.use(
   cors({
     // origin: "http://localhost:5173",
-    origin: "leet-code-master-backend.vercel.app",
+    origin: "http://leet-code-master-backend.vercel.app/",
     credentials: true,
   }),
 );
