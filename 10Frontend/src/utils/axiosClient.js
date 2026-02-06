@@ -2,7 +2,7 @@ import axios from "axios"
 
 const axiosClient =  axios.create({
    // baseURL: 'http://localhost:3000',
-    baseURL: 'https://leet-code-master-backend.vercel.app/',
+    baseURL: 'https://leet-code-master-backend.vercel.app',
     
     withCredentials: true,
     headers: {
