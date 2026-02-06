@@ -25,7 +25,10 @@ function Homepage() {
   });
 
   useEffect(() => {
-    axiosClient.get("/problem/getAllProblem").then((res) => {
+    axiosClient.get("/problem/getAllProblem", {
+  headers: { Authorization: `Bearer ${token}` }
+})
+.then((res) => {
       setProblems(res.data);
     });
 
