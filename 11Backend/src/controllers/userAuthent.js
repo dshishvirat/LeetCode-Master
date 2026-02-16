@@ -25,7 +25,13 @@ const register = async (req, res) => {
       _id: user._id,
       role: user.role,
     };
-    res.cookie("token", token, { maxAge: 60 * 60 * 1000 });
+    res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,       // required on Vercel (HTTPS)
+  sameSite: "none",   // allows cross-site cookies
+  maxAge: 60 * 60 * 1000,
+});
+
     res.status(201).json({
       user: reply,
       message: "Loggin Successfully",
@@ -59,7 +65,11 @@ const login = async (req, res) => {
       process.env.JWT_KEY,
       { expiresIn: 60 * 60 },
     );
-    res.cookie("token", token, { maxAge: 60 * 60 * 1000 });
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true, 
+      sameSite: "none",
+      maxAge: 60 * 60 * 1000 });
     res.status(201).json({
       user: reply,
       message: "Loggin Successfully",
@@ -77,7 +87,7 @@ const logout = async (req, res) => {
     await redisClient.set(`token:${token}`, "Blocked");
     await redisClient.expireAt(`token:${token}`, payload.exp);
 
-    res.cookie("token", null, { expires: new Date(Date.now()) });
+    res.cookie("token", "", { httpOnly: true, secure: true, sameSite: "none", expires: new Date(0), });
     res.send("Logged Out Succesfully");
   } catch (err) {
     res.status(503).send("Error: " + err);
@@ -97,7 +107,13 @@ const adminRegister = async (req, res) => {
       process.env.JWT_KEY,
       { expiresIn: 60 * 60 },
     );
-    res.cookie("token", token, { maxAge: 60 * 60 * 1000 });
+    res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,       // required on Vercel (HTTPS)
+  sameSite: "none",   // allows cross-site cookies
+  maxAge: 60 * 60 * 1000,
+});
+
     res.status(201).send("User Registered Successfully");
   } catch (err) {
     res.status(400).send("Error: " + err);
